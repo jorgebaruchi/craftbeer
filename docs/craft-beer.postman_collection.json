@@ -1,0 +1,382 @@
+{
+	"info": {
+		"_postman_id": "ec01fe4c-7deb-41b7-a9a8-846d82fe75ad",
+		"name": "craft-beer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "categoryGetAll",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/category",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "categoryPost",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"categoryName\": \"Pale Ale\",\r\n    \"paisOrigem\": \"USA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/category",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "categoryPut",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"categoryName\": \"Red Pale Ale\",\r\n    \"paisOrigem\": \"USA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/category/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"category",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "categoryDelete",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/category/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"category",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "beerGetAll",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "user",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/beers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"beers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "beerPost",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "user",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"beerName\": \"Skol\",\r\n    \"ingredients\": \"milho\",\r\n    \"alcoholContent\": \"4.5\",\r\n    \"price\": 2.00,\r\n    \"category\": {\r\n    \t\"categoryId\": 1\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/beers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"beers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "beerDelete",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "user",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/beers/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"beers",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "beerPut",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "user",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"beerName\": \"Skol\",\r\n    \"ingredients\": \"milho e outros\",\r\n    \"alcoholContent\": \"4.5\",\r\n    \"price\": 2.00,\r\n    \"category\": {\r\n    \t\"categoryId\": 1\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/beers/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"beers",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
