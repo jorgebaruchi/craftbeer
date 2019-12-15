@@ -1,0 +1,29 @@
+<configuration scan="true" scanPeriod="30 seconds" packagingData="true">
+
+ 	<appender name="textFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${java.io.tmpdir}/logs/craft-beer.log</file>
+		<append>true</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_FOLDER}/${LOG_FILE_NAME}.%d{yyyy-MM-dd_HH}hs.%i.zip</fileNamePattern>
+			<maxHistory>240</maxHistory>
+			<maxFileSize>10MB</maxFileSize>
+		</rollingPolicy>
+		<encoder>
+			<pattern>[%d{dd/MM/yyyy HH:mm:ss.SSS X}] [%-32mdc{X-B3-TraceId:----- traceId -----}] [%-33.-33thread] [%-5level] [%-70logger{70}] %msg%n</pattern>
+		</encoder>
+    </appender>
+    
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>[%d{HH:mm:ss.SSS}] [%-33.-33thread] [%-5level] [%-70logger{70}] %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="com.beerhouse" level="DEBUG"/>
+
+	<root level="INFO">
+		<appender-ref ref="textFile" />
+		<appender-ref ref="console" />
+	</root>
+
+</configuration>
