@@ -1,4 +1,4 @@
-package com.beerhouse.service.exceptions;
+package com.beerhouse.exceptions;
 
 public class BeerCategoryNotFoundException extends RuntimeException {
 

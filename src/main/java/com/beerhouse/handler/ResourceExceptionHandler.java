@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.beerhouse.domain.ErrorDTO;
-import com.beerhouse.service.exceptions.BeerAlreadyExistsException;
-import com.beerhouse.service.exceptions.BeerCategoryAlreadyExistsException;
-import com.beerhouse.service.exceptions.BeerCategoryNotFoundException;
-import com.beerhouse.service.exceptions.BeerNotFoundException;
-import com.beerhouse.service.exceptions.ServiceValidationException;
+import com.beerhouse.exceptions.BeerAlreadyExistsException;
+import com.beerhouse.exceptions.BeerCategoryAlreadyExistsException;
+import com.beerhouse.exceptions.BeerCategoryNotFoundException;
+import com.beerhouse.exceptions.BeerNotFoundException;
+import com.beerhouse.exceptions.ServiceValidationException;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {

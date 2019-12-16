@@ -8,7 +8,7 @@ import org.springframework.validation.BeanPropertyBindingResult;
 
 import com.beerhouse.business.BeerCategoryBusiness;
 import com.beerhouse.domain.BeerCategory;
-import com.beerhouse.service.exceptions.ServiceValidationException;
+import com.beerhouse.exceptions.ServiceValidationException;
 import com.beerhouse.validator.BeerCategoryValidator;
 
 @Service

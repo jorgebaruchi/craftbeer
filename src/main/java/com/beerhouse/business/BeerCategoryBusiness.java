@@ -8,9 +8,9 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.beerhouse.domain.BeerCategory;
+import com.beerhouse.exceptions.BeerCategoryAlreadyExistsException;
+import com.beerhouse.exceptions.BeerCategoryNotFoundException;
 import com.beerhouse.repository.BeerCategoryRepository;
-import com.beerhouse.service.exceptions.BeerCategoryAlreadyExistsException;
-import com.beerhouse.service.exceptions.BeerCategoryNotFoundException;
 
 @Service
 public class BeerCategoryBusiness {

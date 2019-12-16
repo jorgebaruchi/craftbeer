@@ -1,4 +1,4 @@
-package com.beerhouse.service.exceptions;
+package com.beerhouse.exceptions;
 
 import com.beerhouse.domain.BeerCategory;
 

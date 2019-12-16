@@ -9,7 +9,7 @@ import org.springframework.validation.BeanPropertyBindingResult;
 
 import com.beerhouse.business.BeerBusiness;
 import com.beerhouse.domain.Beer;
-import com.beerhouse.service.exceptions.ServiceValidationException;
+import com.beerhouse.exceptions.ServiceValidationException;
 import com.beerhouse.validator.BeerValidator;
 
 @Service
