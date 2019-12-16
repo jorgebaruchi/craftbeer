@@ -12,6 +12,11 @@ public class ServiceValidationException extends RuntimeException {
 		super(String.format("Erro(s) de validação do component %s: %s", bindingResult.getObjectName(), bindingResult.getAllErrors()));
 		this.bindingResult = bindingResult;
 	}
+	
+	public ServiceValidationException(String msg) {
+		super(msg);
+		this.bindingResult = null;
+	}
 
 	public BindingResult getBindingResult() {
 		return bindingResult;

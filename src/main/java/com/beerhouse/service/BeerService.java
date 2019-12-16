@@ -1,5 +1,6 @@
 package com.beerhouse.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,13 @@ public class BeerService {
 	
 	public void delete(Long id) {
 		business.delete(id);
+	}
+	
+	public List<Beer> updatePrice(BigDecimal percent) {
+		if (percent.compareTo(BigDecimal.ZERO) <= 0){
+			throw new ServiceValidationException("Valor deve ser maior que zero!");
+		}
+		return business.updatePrice(percent);
 	}
 
 	private void validate(Beer beer) {

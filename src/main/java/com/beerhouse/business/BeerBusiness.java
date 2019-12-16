@@ -1,5 +1,6 @@
 package com.beerhouse.business;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,5 +58,13 @@ public class BeerBusiness {
 		} catch (EmptyResultDataAccessException e) {
 			throw new BeerNotFoundException("A cerveja não foi encontrada.", id);
 		}
+	}
+	
+	public List<Beer> updatePrice(BigDecimal percent) {
+		BigDecimal percentual = percent.divide(BigDecimal.valueOf(100L));
+		List<Beer> beers = repository.findAll();
+		beers.forEach(b -> b.setPrice(b.getPrice().multiply(percentual)));
+		repository.saveAll(beers);
+		return beers;
 	}
 }

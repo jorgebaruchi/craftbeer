@@ -1,5 +1,6 @@
 package com.beerhouse.controller;
 
+import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -65,7 +67,7 @@ public class BeerController{
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody Beer beer, 
+	public ResponseEntity<Void> update(@Valid @RequestBody Beer beer, 
 			@PathVariable("id") Long id) {
 		log.debug("Iniciando tratamento da requisicao put: " + beer);
 		beer.setBeerId(id);
@@ -81,5 +83,13 @@ public class BeerController{
 		CacheControl cache = CacheControl.maxAge(10, TimeUnit.SECONDS);		
 		log.debug("Requisicao rest concluida com sucesso: " + beer);
 		return ResponseEntity.status(HttpStatus.OK).cacheControl(cache).body(beer);
+	}
+	
+	@RequestMapping(value = "/ajustPrice", method = RequestMethod.PUT)
+	public ResponseEntity<List<Beer>> update(@RequestParam(name = "ajustPercent", required = true) @Valid BigDecimal percent) {
+		log.debug("Iniciando tratamento da requisicao put: " + percent);
+		List<Beer> beers = service.updatePrice(percent);
+		log.debug("Requisicao rest concluida com sucesso.");
+		return ResponseEntity.status(HttpStatus.OK).body(beers);
 	}
 }

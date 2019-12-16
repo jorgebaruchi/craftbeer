@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ec01fe4c-7deb-41b7-a9a8-846d82fe75ad",
+		"_postman_id": "0a198023-dd49-4eab-a18c-bf0a24e1d10f",
 		"name": "craft-beer",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -372,6 +372,63 @@
 					"path": [
 						"beers",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "beerUpdatePrice",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "user",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/beers/ajustPrice?ajustPercent=110",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"beers",
+						"ajustPrice"
+					],
+					"query": [
+						{
+							"key": "ajustPercent",
+							"value": "110"
+						}
 					]
 				}
 			},

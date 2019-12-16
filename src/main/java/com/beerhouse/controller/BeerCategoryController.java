@@ -65,7 +65,7 @@ public class BeerCategoryController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody BeerCategory category, 
+	public ResponseEntity<Void> update(@Valid @RequestBody BeerCategory category, 
 			@PathVariable("id") Long id) {
 		log.debug("Iniciando tratamento da requisicao put: " + category);
 		category.setCategoryId(id);
