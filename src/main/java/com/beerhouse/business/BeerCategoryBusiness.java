@@ -30,7 +30,7 @@ public class BeerCategoryBusiness {
 				throw new BeerCategoryAlreadyExistsException("A categoria já existe.", category);
 			}
 		}
-		return repository.save(category);
+		return repository.saveAndFlush(category);
 	}
 	
 	public BeerCategory find(Long id) {
@@ -44,7 +44,7 @@ public class BeerCategoryBusiness {
 	
 	public void update(BeerCategory category) {
 		check(category);
-		repository.save(category);
+		repository.saveAndFlush(category);
 	}
 	
 	private void check(BeerCategory category) {

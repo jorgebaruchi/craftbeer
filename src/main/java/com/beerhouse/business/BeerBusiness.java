@@ -31,7 +31,7 @@ public class BeerBusiness {
 				throw new BeerAlreadyExistsException("A cerveja já existe.", beer);
 			}
 		}
-		return repository.save(beer);
+		return repository.saveAndFlush(beer);
 	}
 	
 	public Beer find(Long id) {
@@ -45,7 +45,7 @@ public class BeerBusiness {
 	
 	public void update(Beer beer) {
 		check(beer);
-		repository.save(beer);
+		repository.saveAndFlush(beer);
 	}
 	
 	private void check(Beer beer) {
