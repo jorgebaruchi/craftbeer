@@ -72,6 +72,23 @@ public class ApplicationTests {
     }
 
     @Test
+    public void whenInvalidInput_thenBadRequest() throws IOException, Exception {
+ 	    BeerCategory beerCategory = new BeerCategory();
+ 	    beerCategory.setCategoryId(1L);
+ 		
+ 	    Beer beer = new Beer();
+ 	    beer.setBeerName("Brahma123");
+ 	    beer.setAlcoholContent("4.5");
+ 	    beer.setCategory(beerCategory);
+ 	    beer.setIngredients("milho");
+ 	    beer.setPrice(new BigDecimal(2.00));
+ 	    
+        mvc.perform(post("/beers").contentType(MediaType.APPLICATION_JSON)
+        		.content(toJson(beer)))
+        		.andExpect(status().is4xxClientError());
+    }    
+    
+    @Test
     public void givenBeesList_whenGet_thenStatus200() throws Exception {
         createTestBeer("Heineken");
         createTestBeer("Devassa");

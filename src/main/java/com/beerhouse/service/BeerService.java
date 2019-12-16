@@ -1,61 +1,53 @@
 package com.beerhouse.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BeanPropertyBindingResult;
 
+import com.beerhouse.business.BeerBusiness;
 import com.beerhouse.domain.Beer;
-import com.beerhouse.repository.BeerRepository;
-import com.beerhouse.service.exceptions.BeerAlreadyExistsException;
-import com.beerhouse.service.exceptions.BeerNotFoundException;
+import com.beerhouse.service.exceptions.ServiceValidationException;
+import com.beerhouse.validator.BeerValidator;
 
 @Service
 public class BeerService {
 
 	@Autowired
-	private BeerRepository repository;
+	private BeerBusiness business;
+	
+	@Autowired
+	private BeerValidator validator;
 	
 	public List<Beer> list() {
-		return repository.findAll();
+		return business.list();
 	}	
 	
+	@SuppressWarnings("null")
 	public Beer save(Beer beer) {
-		if(beer.getBeerId() != null) {
-			Optional<Beer> beerAux = repository.findById(beer.getBeerId());
-			
-			if(beerAux.isPresent()) {
-				throw new BeerAlreadyExistsException("A cerveja já existe.", beer);
-			}
-		}
-		return repository.save(beer);
+		validate(beer);
+		return business.save(beer);
 	}
 	
 	public Beer find(Long id) {
-		Optional<Beer> beer = repository.findById(id);
-		
-		if(!beer.isPresent()) {
-			throw new BeerNotFoundException("A cerveja não foi encontrada", id);
-		}
-		return beer.get();
+		return business.find(id);
 	}
 	
 	public void update(Beer beer) {
-		check(beer);
-		repository.save(beer);
-	}
-	
-	private void check(Beer beer) {
-		find(beer.getBeerId());
+		validate(beer);
+		business.update(beer);
 	}
 	
 	public void delete(Long id) {
-		try {
-			repository.deleteById(id);
-		} catch (EmptyResultDataAccessException e) {
-			throw new BeerNotFoundException("A cerveja não foi encontrada.", id);
+		business.delete(id);
+	}
+
+	private void validate(Beer beer) {
+		BeanPropertyBindingResult validacao = new BeanPropertyBindingResult(beer, "Beer", false, Integer.MAX_VALUE);;
+		validator.validate(beer, validacao);
+		if (validacao.hasErrors()) {
+			throw new ServiceValidationException(validacao);
 		}
 	}
 }

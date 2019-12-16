@@ -1,61 +1,52 @@
 package com.beerhouse.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BeanPropertyBindingResult;
 
+import com.beerhouse.business.BeerCategoryBusiness;
 import com.beerhouse.domain.BeerCategory;
-import com.beerhouse.repository.BeerCategoryRepository;
-import com.beerhouse.service.exceptions.BeerCategoryAlreadyExistsException;
-import com.beerhouse.service.exceptions.BeerCategoryNotFoundException;
+import com.beerhouse.service.exceptions.ServiceValidationException;
+import com.beerhouse.validator.BeerCategoryValidator;
 
 @Service
 public class BeerCategoryService {
 
 	@Autowired
-	private BeerCategoryRepository repository;
+	private BeerCategoryBusiness business;
+	
+	@Autowired
+	private BeerCategoryValidator validator;
 	
 	public List<BeerCategory> list() {
-		return repository.findAll();
+		return business.list();
 	}	
 	
 	public BeerCategory save(BeerCategory category) {
-		if(category.getCategoryId() != null) {
-			Optional<com.beerhouse.domain.BeerCategory> categoryAux = repository.findById(category.getCategoryId());
-			
-			if(categoryAux.isPresent()) {
-				throw new BeerCategoryAlreadyExistsException("A categoria já existe.", category);
-			}
-		}
-		return repository.save(category);
+		validate(category);
+		return business.save(category);
 	}
 	
 	public BeerCategory find(Long id) {
-		Optional<BeerCategory> beerCategory = repository.findById(id);
-		
-		if(!beerCategory.isPresent()) {
-			throw new BeerCategoryNotFoundException("A categoria não pôde ser encontrada.", id);
-		}
-		return beerCategory.get();
+		return business.find(id);
 	}
 	
 	public void update(BeerCategory category) {
-		check(category);
-		repository.save(category);
-	}
-	
-	private void check(BeerCategory category) {
-		find(category.getCategoryId());
+		validate(category);
+		business.update(category);
 	}
 	
 	public void delete(Long id) {
-		try {
-			repository.deleteById(id);
-		} catch (EmptyResultDataAccessException e) {
-			throw new BeerCategoryNotFoundException("A categoria não pôde ser encontrada.", id);
+		business.delete(id);
+	}
+	
+	private void validate(BeerCategory category) {
+		BeanPropertyBindingResult validacao = new BeanPropertyBindingResult(category, "BeerCategory", false, Integer.MAX_VALUE);;
+		validator.validate(category, validacao);
+		if (validacao.hasErrors()) {
+			throw new ServiceValidationException(validacao);
 		}
 	}
 }

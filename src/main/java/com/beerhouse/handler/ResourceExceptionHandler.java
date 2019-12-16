@@ -13,10 +13,24 @@ import com.beerhouse.service.exceptions.BeerAlreadyExistsException;
 import com.beerhouse.service.exceptions.BeerCategoryAlreadyExistsException;
 import com.beerhouse.service.exceptions.BeerCategoryNotFoundException;
 import com.beerhouse.service.exceptions.BeerNotFoundException;
+import com.beerhouse.service.exceptions.ServiceValidationException;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
-
+	
+	@ExceptionHandler(ServiceValidationException.class)
+	public ResponseEntity<ErrorDTO> handleServiceValidationException
+							(ServiceValidationException e, HttpServletRequest request) {
+		
+		ErrorDTO erro = new ErrorDTO();
+		erro.setStatus(400l);
+		erro.setError(e.getMessage());
+		erro.setDetail("Corrija os parâmetros e repita a operação");
+		erro.setTimestamp(System.currentTimeMillis());
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
+	}
+	
 	@ExceptionHandler(BeerNotFoundException.class)
 	public ResponseEntity<ErrorDTO> handleBeerNotFoundException
 							(BeerNotFoundException e, HttpServletRequest request) {
@@ -35,7 +49,7 @@ public class ResourceExceptionHandler {
 							(BeerAlreadyExistsException e, HttpServletRequest request) {
 		
 		ErrorDTO erro = new ErrorDTO();
-		erro.setStatus(404l);
+		erro.setStatus(409l);
 		erro.setError(e.getMessage());
 		erro.setDetail(e.getBeer().toString());
 		erro.setTimestamp(System.currentTimeMillis());
